@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-namespace FtpClient
+namespace RecordUploader.Utils
 {
     class SimpleFtpClient
     {
@@ -60,7 +60,7 @@ namespace FtpClient
                 var fullremotepath = remotepath + "\\" + Path.GetFileName(file);
                 // Локальный путь
                 var fulllocalpath = Path.GetFullPath(file);
-                // Загрузить на сервер (возможна смена с Upload на UploadFtp)
+                // Загрузить на сервер (смена с Upload на UploadFtp)
                 Upload(fulllocalpath, fullremotepath);
             }
 
@@ -93,7 +93,8 @@ namespace FtpClient
                 return false;
             }
         }
-        
+
+        //227 Entering Passive Mode
         public void Upload(string filepath, string targetpath)
         {
             using (WebClient client = new WebClient())
@@ -106,7 +107,7 @@ namespace FtpClient
         }
 
         public void UploadFtp(string filepath, string targetpath)
-        {
+        {   
             var fixedpath = targetpath.Replace(@"\", "/");
             UploadFileToFtp("ftp://" + FtpServerUrl + "/" + fixedpath, filepath, FtpUser, FtpPass);
         }
