@@ -14,9 +14,9 @@ namespace FtpClient
 {
     public partial class FormStart : Form
     {
-        string LoginFtp = "admin";
-        string PwdFtp = "getpwd";
-        string HostFtp = "8.8.8.8";
+        string LoginFtp = "records";
+        string PwdFtp = "getaccess";
+        string HostFtp = "193.93.123.242";
         string PortFtp = "22021";
         
 
@@ -27,16 +27,16 @@ namespace FtpClient
 
         private void buttonCreateDir_Click(object sender, EventArgs e)
         {
-            string root = "Glav";
-            var ftp = new SimpleFtpClient(LoginFtp, PwdFtp,  string.Format("{0}:{1}", HostFtp, PortFtp), @"D:\Images");
+            string root = "Главный офис";
+            var ftp = new SimpleFtpClient(LoginFtp, PwdFtp,  string.Format("{0}:{1}", HostFtp, PortFtp), @"D:\Gac");
             ftp.CreateDir(root);
             MessageBox.Show("Каталог создан", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonUploadDir_Click(object sender, EventArgs e)
         {
-            string root = "Glav";
-            var ftp = new SimpleFtpClient(LoginFtp, PwdFtp, string.Format("{0}:{1}/{2}", HostFtp, PortFtp, root), @"D:\Images");
+            string root = "Главный офис";
+            var ftp = new SimpleFtpClient(LoginFtp, PwdFtp, string.Format("{0}:{1}/{2}", HostFtp, PortFtp, root), @"D:\Gac");
             ftp.UploadDirectory();
             MessageBox.Show("Каталог скопирован", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
