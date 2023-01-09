@@ -167,7 +167,7 @@ namespace LibGenerateZaFoms.Utils
             {
                 checkboxSexAM.CheckState = Spire.Xls.CheckState.Checked;
             }
-            else
+            else if (agent.Sex.ToLower().Equals("ж"))
             {
                 checkboxSexAF.CheckState = Spire.Xls.CheckState.Checked;
             }
@@ -468,7 +468,7 @@ namespace LibGenerateZaFoms.Utils
             {
                 checkboxSexM.CheckState = Spire.Xls.CheckState.Checked;
             }
-            else
+            else if (z.Sex.ToLower().Equals("ж"))
             {
                 checkboxSexF.CheckState = Spire.Xls.CheckState.Checked;
             }
@@ -538,7 +538,7 @@ namespace LibGenerateZaFoms.Utils
             {
                 checkboxOldSexM.CheckState = Spire.Xls.CheckState.Checked;
             }
-            else
+            else if (z.OldSex.ToLower().Equals("ж"))
             {
                 checkboxOldSexF.CheckState = Spire.Xls.CheckState.Checked;
             }
