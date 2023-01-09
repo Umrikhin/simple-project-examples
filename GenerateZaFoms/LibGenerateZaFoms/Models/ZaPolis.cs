@@ -50,6 +50,7 @@ namespace LibGenerateZaFoms.Models
         public string Manager { get; set; }
         public string DZ { get; set; }
         public string PathTemplate { get; set; }
+        public string PathFile { get; set; }
         public string PathOut { get; set; }
 
         public ZaPolis()
@@ -98,6 +99,7 @@ namespace LibGenerateZaFoms.Models
             DZ = string.Empty;
             var path = new System.IO.FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
             PathTemplate = System.IO.Path.Combine(path.DirectoryName, "Template", "ZaPolis.xlsx");
+            PathFile = string.Empty;
             PathOut = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Заявления переоформления");
         }
     }

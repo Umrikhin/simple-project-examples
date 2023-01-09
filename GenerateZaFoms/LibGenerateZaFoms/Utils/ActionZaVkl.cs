@@ -6,6 +6,10 @@ using System.Text;
 using Spire.Xls;
 using System.IO;
 
+using PdfSharp;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
+
 namespace LibGenerateZaFoms.Utils
 {
     public class ActionZaVkl
@@ -538,6 +542,7 @@ namespace LibGenerateZaFoms.Utils
             DateTime dR = DateTime.MinValue;
             DateTime.TryParse(z.DR, out dR);
             string filePdf = z.Famip + z.Namep + z.Otchp + dR.ToString("ddMMyyyy") + ".pdf";
+            z.PathFile = filePdf;
 
             if (!Directory.Exists(z.PathOut)) Directory.CreateDirectory(z.PathOut);
 
@@ -551,18 +556,30 @@ namespace LibGenerateZaFoms.Utils
             if (showFile) System.Diagnostics.Process.Start(Path.Combine(z.PathOut, filePdf));
         }
 
-        public static void CreateListPDF(List<LibGenerateZaFoms.Models.ZaVkl> lz, bool showFile = true)
+        public static void CreateListPDF(List<LibGenerateZaFoms.Models.ZaVkl> lz, bool showFile = true, bool merge = true)
         {
+            List<string> pdfFilePaths = new List<string>();
             foreach (var item in lz)
             {
                 CreatePDF(item, false);
+                pdfFilePaths.Add(Path.Combine(item.PathOut, item.PathFile));
+            }
+            if (merge)
+            {
+                string filename = Path.Combine(lz[0].PathOut, "Z" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".pdf");
+                MergePDFs(filename, pdfFilePaths.ToArray());
+                foreach (var item in pdfFilePaths)
+                {
+                    File.Delete(item);
+                }
+                if (showFile) System.Diagnostics.Process.Start(filename);
+                return;
             }
             if (showFile)
             {
                 if (lz.Count == 1)
                 {
-                    string filePdf = lz[0].Famip + lz[0].Namep + lz[0].Otchp + DateTime.Parse(lz[0].DR).ToString("ddMMyyyy") + ".pdf";
-                    System.Diagnostics.Process.Start(Path.Combine(lz[0].PathOut, filePdf));
+                    System.Diagnostics.Process.Start(Path.Combine(lz[0].PathOut, lz[0].PathFile));
                 }
                 if (lz.Count > 1)
                 {
@@ -570,5 +587,22 @@ namespace LibGenerateZaFoms.Utils
                 }
             }
         }
+
+        public static void MergePDFs(string targetPath, params string[] pdfs)
+        {
+            using (var targetDoc = new PdfDocument())
+            {
+                foreach (var pdf in pdfs)
+                {
+                    using (var pdfDoc = PdfReader.Open(pdf, PdfDocumentOpenMode.Import))
+                    {
+                        for (var i = 0; i < pdfDoc.PageCount; i++)
+                            targetDoc.AddPage(pdfDoc.Pages[i]);
+                    }
+                }
+                targetDoc.Save(targetPath);
+            }
+        }
+
     }
 }
