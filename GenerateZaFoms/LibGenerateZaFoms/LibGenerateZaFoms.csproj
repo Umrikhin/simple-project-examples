@@ -61,10 +61,18 @@
     <Compile Include="Models\Agent.cs" />
     <Compile Include="Models\Doc.cs" />
     <Compile Include="Models\Notif.cs" />
+    <Compile Include="Models\ZaDelay.cs" />
+    <Compile Include="Models\ZaGet.cs" />
+    <Compile Include="Models\ZaGiveup.cs" />
     <Compile Include="Models\ZaPolis.cs" />
+    <Compile Include="Models\ZaSk.cs" />
     <Compile Include="Models\ZaVkl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ActionZaGiveup.cs" />
+    <Compile Include="Utils\ActionZaDelay.cs" />
+    <Compile Include="Utils\ActionZaGet.cs" />
     <Compile Include="Utils\ActionZaPolis.cs" />
+    <Compile Include="Utils\ActionZaSk.cs" />
     <Compile Include="Utils\ActionZaVkl.cs" />
     <Compile Include="Utils\Enums.cs" />
   </ItemGroup>

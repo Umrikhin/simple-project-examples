@@ -51,6 +51,7 @@ namespace LibGenerateZaFoms.Utils
                 Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(35, 5, 20, 20);
                 textboxIndex.Left = textboxIndex.Left + i * 20;
                 if (address.Index.Length == 6) textboxIndex.Text = address.Index[i].ToString();
+                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P35"].Style.Font);
                 textboxIndex.TextFrame.IsAutoMargin = true;
                 textboxIndex.HAlignment = CommentHAlignType.Center;
                 textboxIndex.VAlignment = CommentVAlignType.Center;
@@ -84,6 +85,7 @@ namespace LibGenerateZaFoms.Utils
                 Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(44, 5, 20, 20);
                 textboxIndex.Left = textboxIndex.Left + i * 20;
                 if (address.Index.Length == 6) textboxIndex.Text = address.Index[i].ToString();
+                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P44"].Style.Font);
                 textboxIndex.TextFrame.IsAutoMargin = true;
                 textboxIndex.HAlignment = CommentHAlignType.Center;
                 textboxIndex.VAlignment = CommentVAlignType.Center;
@@ -261,6 +263,7 @@ namespace LibGenerateZaFoms.Utils
                 Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(98, 5, 20, 20);
                 textboxIndex.Left = textboxIndex.Left + i * 20;
                 if (address.Index.Length == 6) textboxIndex.Text = address.Index[i].ToString();
+                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P98"].Style.Font);
                 textboxIndex.TextFrame.IsAutoMargin = true;
                 textboxIndex.HAlignment = CommentHAlignType.Center;
                 textboxIndex.VAlignment = CommentVAlignType.Center;
@@ -294,6 +297,7 @@ namespace LibGenerateZaFoms.Utils
                 Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(107, 5, 20, 20);
                 textboxIndex.Left = textboxIndex.Left + i * 20;
                 if (address.Index.Length == 6) textboxIndex.Text = address.Index[i].ToString();
+                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P107"].Style.Font);
                 textboxIndex.TextFrame.IsAutoMargin = true;
                 textboxIndex.HAlignment = CommentHAlignType.Center;
                 textboxIndex.VAlignment = CommentVAlignType.Center;
@@ -566,7 +570,7 @@ namespace LibGenerateZaFoms.Utils
             }
             if (merge)
             {
-                string filename = Path.Combine(lz[0].PathOut, "Z" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".pdf");
+                string filename = Path.Combine(lz[0].PathOut, "Zvkl" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".pdf");
                 MergePDFs(filename, pdfFilePaths.ToArray());
                 foreach (var item in pdfFilePaths)
                 {

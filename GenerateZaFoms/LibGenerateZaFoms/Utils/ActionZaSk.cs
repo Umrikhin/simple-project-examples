@@ -1,45 +1,48 @@
-﻿using System;
+﻿using Spire.Xls;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-
-using Spire.Xls;
-using System.IO;
 
 using PdfSharp;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
+using LibGenerateZaFoms.Models;
+using Spire.Xls.Core;
+using PdfSharp.Charting;
+using Spire.Xls.Core.Spreadsheet;
 
 namespace LibGenerateZaFoms.Utils
 {
-    public class ActionZaPolis
+    public class ActionZaSk
     {
         static void SetDoc(ref Worksheet sh, LibGenerateZaFoms.Models.Doc doc)
         {
             if (doc == null) return;
             //Тип документа
-            sh.Range["I33"].Text = doc.TypeDoc;
+            sh.Range["H46"].Text = doc.TypeDoc;
             //Серия
-            sh.Range["D34"].Text = doc.SerDoc;
+            sh.Range["D47"].Text = doc.SerDoc;
             //Номер
-            sh.Range["I34"].Text = doc.NumDoc;
+            sh.Range["I47"].Text = doc.NumDoc;
             //Дата выдачи
-            sh.Range["R34"].Text = doc.DateDoc;
+            sh.Range["R47"].Text = doc.DateDoc;
             //Кем выдан
-            sh.Range["D35"].Text = doc.NpDoc;
+            sh.Range["D48"].Text = doc.NpDoc;
         }
 
         static void SetDoc2(ref Worksheet sh, LibGenerateZaFoms.Models.Doc doc)
         {
             if (doc == null) return;
             //Тип документа
-            sh.Range["E55"].Text = doc.TypeDoc;
+            sh.Range["E69"].Text = doc.TypeDoc;
             //Серия
-            sh.Range["D56"].Text = doc.SerDoc;
+            sh.Range["D70"].Text = doc.SerDoc;
             //Номер
-            sh.Range["M56"].Text = doc.NumDoc;
+            sh.Range["M70"].Text = doc.NumDoc;
             //Кем и когда выдан
-            sh.Range["F57"].Text = doc.NpDoc + ", " + doc.DateDoc;
+            sh.Range["F71"].Text = doc.NpDoc + ", " + doc.DateDoc;
         }
 
         static void SetRegAddress(ref Worksheet sh, LibGenerateZaFoms.Models.RegAddress address)
@@ -48,32 +51,32 @@ namespace LibGenerateZaFoms.Utils
             //Индекс
             for (int i = 0; i < 6; i++)
             {
-                Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(39, 5, 20, 20);
+                Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(53, 6, 20, 20);
                 textboxIndex.Left = textboxIndex.Left + i * 20;
                 if (address.Index.Length == 6) textboxIndex.Text = address.Index[i].ToString();
-                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P39"].Style.Font);
+                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P53"].Style.Font);
                 textboxIndex.TextFrame.IsAutoMargin = true;
                 textboxIndex.HAlignment = CommentHAlignType.Center;
                 textboxIndex.VAlignment = CommentVAlignType.Center;
             }
             //Субъект РФ
-            sh.Range["P39"].Text = address.Subj;
+            sh.Range["P53"].Text = address.Subj;
             //Район
-            sh.Range["D41"].Text = address.Rayon;
+            sh.Range["D55"].Text = address.Rayon;
             //Город
-            sh.Range["P41"].Text = address.Town;
+            sh.Range["P55"].Text = address.Town;
             //Населенный пункт
-            sh.Range["F42"].Text = address.LocalityOrCity;
+            sh.Range["F56"].Text = address.LocalityOrCity;
             //Улица
-            sh.Range["P42"].Text = address.Street;
+            sh.Range["P56"].Text = address.Street;
             //Дом
-            sh.Range["F44"].Text = address.House;
+            sh.Range["F58"].Text = address.House;
             //Корпус
-            sh.Range["N44"].Text = address.Korp;
+            sh.Range["N58"].Text = address.Korp;
             //Квартира
-            sh.Range["T44"].Text = address.Kv;
+            sh.Range["T58"].Text = address.Kv;
             //Дата регистрации
-            sh.Range["I45"].Text = address.DateReg;
+            sh.Range["I59"].Text = address.DateReg;
         }
 
         static void SetFactAddress(ref Worksheet sh, LibGenerateZaFoms.Models.Address address)
@@ -82,48 +85,50 @@ namespace LibGenerateZaFoms.Utils
             //Индекс
             for (int i = 0; i < 6; i++)
             {
-                Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(48, 5, 20, 20);
+                Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(62, 6, 20, 20);
                 textboxIndex.Left = textboxIndex.Left + i * 20;
                 if (address.Index.Length == 6) textboxIndex.Text = address.Index[i].ToString();
-                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P48"].Style.Font);
+                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P62"].Style.Font);
                 textboxIndex.TextFrame.IsAutoMargin = true;
                 textboxIndex.HAlignment = CommentHAlignType.Center;
                 textboxIndex.VAlignment = CommentVAlignType.Center;
             }
             //Субъект РФ
-            sh.Range["P48"].Text = address.Subj;
+            sh.Range["P62"].Text = address.Subj;
             //Район
-            sh.Range["D50"].Text = address.Rayon;
+            sh.Range["D64"].Text = address.Rayon;
             //Город
-            sh.Range["P50"].Text = address.Town;
+            sh.Range["P64"].Text = address.Town;
             //Населенный пункт
-            sh.Range["F51"].Text = address.LocalityOrCity;
+            sh.Range["F65"].Text = address.LocalityOrCity;
             //Улица
-            sh.Range["P51"].Text = address.Street;
+            sh.Range["P65"].Text = address.Street;
             //Дом
-            sh.Range["F53"].Text = address.House;
+            sh.Range["F67"].Text = address.House;
             //Корпус
-            sh.Range["N53"].Text = address.Korp;
+            sh.Range["N67"].Text = address.Korp;
             //Квартира
-            sh.Range["T53"].Text = address.Kv;
+            sh.Range["T67"].Text = address.Kv;
         }
 
         static void SetNotif(ref Worksheet sh, LibGenerateZaFoms.Models.Notif notif)
         {
             if (notif == null) return;
             //Флажки для способов оповещения
-            Spire.Xls.Core.ICheckBox checkboxSms = sh.CheckBoxes.AddCheckBox(80, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxSms = sh.CheckBoxes.AddCheckBox(91, 1, 20, 20);
             checkboxSms.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxMail = sh.CheckBoxes.AddCheckBox(80, 14, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxMail = sh.CheckBoxes.AddCheckBox(91, 14, 20, 20);
             checkboxMail.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxEmail = sh.CheckBoxes.AddCheckBox(81, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxEmail = sh.CheckBoxes.AddCheckBox(92, 1, 20, 20);
             checkboxEmail.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxCall = sh.CheckBoxes.AddCheckBox(81, 14, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCall = sh.CheckBoxes.AddCheckBox(92, 14, 20, 20);
             checkboxCall.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxMsg = sh.CheckBoxes.AddCheckBox(82, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxMsg = sh.CheckBoxes.AddCheckBox(93, 1, 20, 20);
             checkboxMsg.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxOther = sh.CheckBoxes.AddCheckBox(82, 14, 20, 20);
+            checkboxMsg.Top = checkboxMsg.Top + 10;
+            Spire.Xls.Core.ICheckBox checkboxOther = sh.CheckBoxes.AddCheckBox(93, 14, 20, 20);
             checkboxOther.CheckState = Spire.Xls.CheckState.Unchecked;
+            checkboxOther.Top = checkboxOther.Top + 10;
             switch (notif.info)
             {
                 case Utils.Inform.sms:
@@ -147,7 +152,7 @@ namespace LibGenerateZaFoms.Utils
             }
             if (notif.info == Utils.Inform.other)
             {
-                sh.Range["O83"].Text = notif.DespriptionOther;
+                sh.Range["O94"].Text = notif.DespriptionOther;
             }
         }
 
@@ -155,15 +160,15 @@ namespace LibGenerateZaFoms.Utils
         {
             if (agent == null) return;
             //Фамилия
-            sh.Range["D92"].Text = agent.Famip;
+            sh.Range["D96"].Text = agent.Famip;
             //Имя
-            sh.Range["L92"].Text = agent.Namep;
+            sh.Range["L96"].Text = agent.Namep;
             //Отчество
-            sh.Range["F94"].Text = agent.Otchp;
+            sh.Range["F98"].Text = agent.Otchp;
             //Пол
-            Spire.Xls.Core.ICheckBox checkboxSexAM = sh.CheckBoxes.AddCheckBox(96, 4, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxSexAM = sh.CheckBoxes.AddCheckBox(100, 4, 20, 20);
             checkboxSexAM.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxSexAF = sh.CheckBoxes.AddCheckBox(96, 6, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxSexAF = sh.CheckBoxes.AddCheckBox(100, 6, 20, 20);
             checkboxSexAF.CheckState = Spire.Xls.CheckState.Unchecked;
             if (agent.Sex.ToLower().Equals("м"))
             {
@@ -174,21 +179,21 @@ namespace LibGenerateZaFoms.Utils
                 checkboxSexAF.CheckState = Spire.Xls.CheckState.Checked;
             }
             //Дата роджения
-            sh.Range["N96"].Text = agent.DR;
+            sh.Range["N100"].Text = agent.DR;
             //Гражданство
-            sh.Range["E98"].Text = agent.Land;
+            sh.Range["E102"].Text = agent.Land;
             //Статус представителя
-            Spire.Xls.Core.ICheckBox checkboxMother = sh.CheckBoxes.AddCheckBox(100, 13, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxMother = sh.CheckBoxes.AddCheckBox(104, 13, 20, 20);
             checkboxMother.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxFather = sh.CheckBoxes.AddCheckBox(101, 13, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxFather = sh.CheckBoxes.AddCheckBox(105, 13, 20, 20);
             checkboxFather.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxOpekun = sh.CheckBoxes.AddCheckBox(100, 17, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxOpekun = sh.CheckBoxes.AddCheckBox(104, 17, 20, 20);
             checkboxOpekun.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxPopechitel = sh.CheckBoxes.AddCheckBox(101, 17, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxPopechitel = sh.CheckBoxes.AddCheckBox(105, 17, 20, 20);
             checkboxPopechitel.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxUsinovitel = sh.CheckBoxes.AddCheckBox(100, 21, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxUsinovitel = sh.CheckBoxes.AddCheckBox(104, 21, 20, 20);
             checkboxUsinovitel.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxByProxy = sh.CheckBoxes.AddCheckBox(101, 21, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxByProxy = sh.CheckBoxes.AddCheckBox(105, 21, 20, 20);
             checkboxByProxy.CheckState = Spire.Xls.CheckState.Unchecked;
             switch (agent.status)
             {
@@ -214,44 +219,44 @@ namespace LibGenerateZaFoms.Utils
 
             //Документ
             //Тип документа
-            sh.Range["S102"].Text = agent.doc.TypeDoc;
+            sh.Range["S106"].Text = agent.doc.TypeDoc;
             //Серия
-            sh.Range["D103"].Text = agent.doc.SerDoc;
+            sh.Range["D108"].Text = agent.doc.SerDoc;
             //Номер
-            sh.Range["I103"].Text = agent.doc.NumDoc;
+            sh.Range["I108"].Text = agent.doc.NumDoc;
             //Дата выдачи
-            sh.Range["R103"].Text = agent.doc.DateDoc;
+            sh.Range["R108"].Text = agent.doc.DateDoc;
             //Кем выдан
-            sh.Range["D104"].Text = agent.doc.NpDoc;
+            sh.Range["D109"].Text = agent.doc.NpDoc;
 
             //Документ статуса
             //Серия
-            sh.Range["D106"].Text = agent.docStatusSer;
+            sh.Range["D111"].Text = agent.docStatusSer;
             //Номер
-            sh.Range["I106"].Text = agent.docStatusNum;
+            sh.Range["I111"].Text = agent.docStatusNum;
             //Дата выдачи
-            sh.Range["Q106"].Text = agent.docStatusDbeg;
+            sh.Range["Q111"].Text = agent.docStatusDbeg;
 
             //СНИЛС
-            sh.Range["O107"].Text = agent.Snils;
+            sh.Range["O112"].Text = agent.Snils;
 
             //ЕНП
-            sh.Range["M108"].Text = agent.ENP;
+            sh.Range["M113"].Text = agent.ENP;
 
             //Адрес регистрации
             SetRegAgentAddress(ref sh, agent.regAddress);
             //Бомж
-            Spire.Xls.Core.ICheckBox checkboxABomg = sh.CheckBoxes.AddCheckBox(117, 2, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxABomg = sh.CheckBoxes.AddCheckBox(122, 2, 20, 20);
             checkboxABomg.CheckState = Spire.Xls.CheckState.Unchecked;
             if (agent.Bomg > 0) checkboxABomg.CheckState = Spire.Xls.CheckState.Checked;
             //Адрес пребывания
             SetFactAgentAddress(ref sh, agent.factAddress);
 
             //Контакты
-            sh.Range["G125"].Text = agent.PhoneMob;
-            sh.Range["M125"].Text = agent.PhoneHome;
-            sh.Range["S125"].Text = agent.PhoneWork;
-            sh.Range["G126"].Text = agent.Email;
+            sh.Range["G130"].Text = agent.PhoneMob;
+            sh.Range["M130"].Text = agent.PhoneHome;
+            sh.Range["S130"].Text = agent.PhoneWork;
+            sh.Range["G131"].Text = agent.Email;
         }
 
         static void SetRegAgentAddress(ref Worksheet sh, LibGenerateZaFoms.Models.RegAddress address)
@@ -260,32 +265,32 @@ namespace LibGenerateZaFoms.Utils
             //Индекс
             for (int i = 0; i < 6; i++)
             {
-                Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(110, 5, 20, 20);
+                Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(115, 6, 20, 20);
                 textboxIndex.Left = textboxIndex.Left + i * 20;
                 if (address.Index.Length == 6) textboxIndex.Text = address.Index[i].ToString();
-                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P110"].Style.Font);
+                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P115"].Style.Font);
                 textboxIndex.TextFrame.IsAutoMargin = true;
                 textboxIndex.HAlignment = CommentHAlignType.Center;
                 textboxIndex.VAlignment = CommentVAlignType.Center;
             }
             //Субъект РФ
-            sh.Range["P110"].Text = address.Subj;
+            sh.Range["P115"].Text = address.Subj;
             //Район
-            sh.Range["D112"].Text = address.Rayon;
+            sh.Range["D117"].Text = address.Rayon;
             //Город
-            sh.Range["P112"].Text = address.Town;
+            sh.Range["P117"].Text = address.Town;
             //Населенный пункт
-            sh.Range["F113"].Text = address.LocalityOrCity;
+            sh.Range["F118"].Text = address.LocalityOrCity;
             //Улица
-            sh.Range["P113"].Text = address.Street;
+            sh.Range["P118"].Text = address.Street;
             //Дом
-            sh.Range["F115"].Text = address.House;
+            sh.Range["F120"].Text = address.House;
             //Корпус
-            sh.Range["N115"].Text = address.Korp;
+            sh.Range["N120"].Text = address.Korp;
             //Квартира
-            sh.Range["T115"].Text = address.Kv;
+            sh.Range["T120"].Text = address.Kv;
             //Дата регистрации
-            sh.Range["I116"].Text = address.DateReg;
+            sh.Range["I121"].Text = address.DateReg;
         }
 
         static void SetFactAgentAddress(ref Worksheet sh, LibGenerateZaFoms.Models.Address address)
@@ -294,33 +299,33 @@ namespace LibGenerateZaFoms.Utils
             //Индекс
             for (int i = 0; i < 6; i++)
             {
-                Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(119, 5, 20, 20);
+                Spire.Xls.Core.ITextBoxShape textboxIndex = sh.TextBoxes.AddTextBox(124, 6, 20, 20);
                 textboxIndex.Left = textboxIndex.Left + i * 20;
                 if (address.Index.Length == 6) textboxIndex.Text = address.Index[i].ToString();
-                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P119"].Style.Font);
+                if (address.Index.Length == 6) textboxIndex.RichText.SetFont(0, 1, sh.Range["P124"].Style.Font);
                 textboxIndex.TextFrame.IsAutoMargin = true;
                 textboxIndex.HAlignment = CommentHAlignType.Center;
                 textboxIndex.VAlignment = CommentVAlignType.Center;
             }
             //Субъект РФ
-            sh.Range["P119"].Text = address.Subj;
+            sh.Range["P124"].Text = address.Subj;
             //Район
-            sh.Range["D121"].Text = address.Rayon;
+            sh.Range["D126"].Text = address.Rayon;
             //Город
-            sh.Range["P121"].Text = address.Town;
+            sh.Range["P126"].Text = address.Town;
             //Населенный пункт
-            sh.Range["F122"].Text = address.LocalityOrCity;
+            sh.Range["F127"].Text = address.LocalityOrCity;
             //Улица
-            sh.Range["P122"].Text = address.Street;
+            sh.Range["P127"].Text = address.Street;
             //Дом
-            sh.Range["F124"].Text = address.House;
+            sh.Range["F129"].Text = address.House;
             //Корпус
-            sh.Range["N124"].Text = address.Korp;
+            sh.Range["N129"].Text = address.Korp;
             //Квартира
-            sh.Range["T124"].Text = address.Kv;
+            sh.Range["T129"].Text = address.Kv;
         }
 
-        public static void CreatePDF(LibGenerateZaFoms.Models.ZaPolis z, bool showFile = true)
+        public static void CreatePDF(LibGenerateZaFoms.Models.ZaSk z, bool showFile = true)
         {
             Workbook workbook = new Workbook();
             workbook.LoadFromFile(z.PathTemplate);
@@ -330,83 +335,133 @@ namespace LibGenerateZaFoms.Utils
             sheet.Range["K1"].Text = z.SmoName;
             sheet.Range["K3"].Text = (z.Famip + " " + z.Namep + " " + z.Otchp).Replace("  ", " ").Trim();
 
-            Spire.Xls.Core.ICheckBox checkboxVipiska = sheet.CheckBoxes.AddCheckBox(8, 4, 20, 20);
-            checkboxVipiska.CheckState = Spire.Xls.CheckState.Checked;
+            sheet.Range["D8"].Text = z.SmoName;
 
-            //Причина переоформления
-            Spire.Xls.Core.ICheckBox checkboxIzmFam = sheet.CheckBoxes.AddCheckBox(10, 1, 20, 20);
-            checkboxIzmFam.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxNeTochnost = sheet.CheckBoxes.AddCheckBox(11, 1, 20, 20);
-            checkboxNeTochnost.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxOkonchanie = sheet.CheckBoxes.AddCheckBox(12, 1, 20, 20);
-            checkboxOkonchanie.CheckState = Spire.Xls.CheckState.Unchecked;
+            //Причина выбора
+            Spire.Xls.Core.ICheckBox checkboxViborSmo = sheet.CheckBoxes.AddCheckBox(11, 1, 20, 20);
+            checkboxViborSmo.CheckState = Spire.Xls.CheckState.Unchecked;
+            Spire.Xls.Core.ICheckBox checkboxSmoOneYear = sheet.CheckBoxes.AddCheckBox(12, 1, 20, 20);
+            checkboxSmoOneYear.CheckState = Spire.Xls.CheckState.Unchecked;
+            Spire.Xls.Core.ICheckBox checkboxSmoPlace = sheet.CheckBoxes.AddCheckBox(13, 1, 20, 20);
+            checkboxSmoPlace.CheckState = Spire.Xls.CheckState.Unchecked;
+            Spire.Xls.Core.ICheckBox checkboxSmoEndDog = sheet.CheckBoxes.AddCheckBox(14, 1, 20, 20);
+            checkboxSmoEndDog.CheckState = Spire.Xls.CheckState.Unchecked;
             switch (z.prichina)
             {
-                case Utils.PrichinaZameni.IzmFam:
-                    checkboxIzmFam.CheckState = Spire.Xls.CheckState.Checked;
+                case Utils.PrichinaVibor.ViborSmo:
+                    checkboxViborSmo.CheckState = Spire.Xls.CheckState.Checked;
                     break;
-                case Utils.PrichinaZameni.NeTochnost:
-                    checkboxNeTochnost.CheckState = Spire.Xls.CheckState.Checked;
+                case Utils.PrichinaVibor.ZamenaSmoOneYear:
+                    checkboxSmoOneYear.CheckState = Spire.Xls.CheckState.Checked;
                     break;
-                case Utils.PrichinaZameni.Okonchanie:
-                    checkboxOkonchanie.CheckState = Spire.Xls.CheckState.Checked;
+                case Utils.PrichinaVibor.ZamenaSmoPlace:
+                    checkboxSmoPlace.CheckState = Spire.Xls.CheckState.Checked;
+                    break;
+                case Utils.PrichinaVibor.ZamenaSmoEndDog:
+                    checkboxSmoEndDog.CheckState = Spire.Xls.CheckState.Checked;
                     break;
             }
 
+            //Форма полиса
+            Spire.Xls.Core.ICheckBox checkboxBumaga = sheet.CheckBoxes.AddCheckBox(16, 1, 20, 20);
+            checkboxBumaga.CheckState = Spire.Xls.CheckState.Unchecked;
+            Spire.Xls.Core.ICheckBox checkboxCancelGetPolis = sheet.CheckBoxes.AddCheckBox(17, 1, 20, 20);
+            checkboxCancelGetPolis.CheckState = Spire.Xls.CheckState.Unchecked;
+            switch (z.formPolis)
+            {
+                case Utils.FormaPolis.Bumaga:
+                    checkboxBumaga.CheckState = Spire.Xls.CheckState.Checked;
+                    break;
+                case Utils.FormaPolis.CancelGetPolis:
+                    checkboxCancelGetPolis.CheckState = Spire.Xls.CheckState.Checked;
+                    break;
+            }
+            //ЕНП
+            for (int i = 0; i < 16; i++)
+            {
+                Spire.Xls.Core.ITextBoxShape textboxEnp = sheet.TextBoxes.AddTextBox(18, 5, 20, 20);
+                textboxEnp.Left = textboxEnp.Left + i * 20;
+                if (z.ENP.Length == 16) textboxEnp.Text = z.ENP[i].ToString();
+                textboxEnp.RichText.SetFont(0, 1, sheet.Range["B19"].Style.Font);
+                textboxEnp.TextFrame.IsAutoMargin = true;
+                textboxEnp.HAlignment = CommentHAlignType.Center;
+                textboxEnp.VAlignment = CommentVAlignType.Center;
+            }
+            Spire.Xls.Core.ICheckBox checkboxNotEnp = sheet.CheckBoxes.AddCheckBox(18, 23, 20, 20);
+            checkboxNotEnp.CheckState = Spire.Xls.CheckState.Unchecked;
+            if (z.ENP.Length == 0) checkboxNotEnp.CheckState = Spire.Xls.CheckState.Checked;
+
+            //Старая СМО
+            sheet.Range["B19"].Text = z.OldSmo;
+
             //ФИО
-            sheet.Range["D14"].Text = z.Famip;
-            sheet.Range["L14"].Text = z.Namep;
-            sheet.Range["F16"].Text = z.Otchp;
+            sheet.Range["D28"].Text = z.Famip;
+            sheet.Range["L28"].Text = z.Namep;
+            sheet.Range["F30"].Text = z.Otchp;
+
+            //Пол
+            Spire.Xls.Core.ICheckBox checkboxSexM = sheet.CheckBoxes.AddCheckBox(30, 17, 20, 20);
+            checkboxSexM.CheckState = Spire.Xls.CheckState.Unchecked;
+            Spire.Xls.Core.ICheckBox checkboxSexF = sheet.CheckBoxes.AddCheckBox(30, 19, 20, 20);
+            checkboxSexF.CheckState = Spire.Xls.CheckState.Unchecked;
+            if (z.Sex.ToLower().Equals("м"))
+            {
+                checkboxSexM.CheckState = Spire.Xls.CheckState.Checked;
+            }
+            else if (z.Sex.ToLower().Equals("ж"))
+            {
+                checkboxSexF.CheckState = Spire.Xls.CheckState.Checked;
+            }
 
             //Флажки для категории ЗЛ
-            Spire.Xls.Core.ICheckBox checkboxCat1 = sheet.CheckBoxes.AddCheckBox(19, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat1 = sheet.CheckBoxes.AddCheckBox(33, 1, 20, 20);
             checkboxCat1.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat2 = sheet.CheckBoxes.AddCheckBox(20, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat2 = sheet.CheckBoxes.AddCheckBox(34, 1, 20, 20);
             checkboxCat2.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat3 = sheet.CheckBoxes.AddCheckBox(21, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat3 = sheet.CheckBoxes.AddCheckBox(35, 1, 20, 20);
             checkboxCat3.Top = checkboxCat3.Top + 20;
             checkboxCat3.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat4 = sheet.CheckBoxes.AddCheckBox(22, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat4 = sheet.CheckBoxes.AddCheckBox(36, 1, 20, 20);
             checkboxCat4.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat5 = sheet.CheckBoxes.AddCheckBox(23, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat5 = sheet.CheckBoxes.AddCheckBox(37, 1, 20, 20);
             checkboxCat5.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat6 = sheet.CheckBoxes.AddCheckBox(24, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat6 = sheet.CheckBoxes.AddCheckBox(38, 1, 20, 20);
             checkboxCat6.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat7 = sheet.CheckBoxes.AddCheckBox(25, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat7 = sheet.CheckBoxes.AddCheckBox(39, 1, 20, 20);
             checkboxCat7.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat8 = sheet.CheckBoxes.AddCheckBox(26, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat8 = sheet.CheckBoxes.AddCheckBox(40, 1, 20, 20);
             checkboxCat8.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat9 = sheet.CheckBoxes.AddCheckBox(19, 13, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat9 = sheet.CheckBoxes.AddCheckBox(33, 13, 20, 20);
             checkboxCat9.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat10 = sheet.CheckBoxes.AddCheckBox(20, 13, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat10 = sheet.CheckBoxes.AddCheckBox(34, 13, 20, 20);
             checkboxCat10.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat11 = sheet.CheckBoxes.AddCheckBox(21, 13, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat11 = sheet.CheckBoxes.AddCheckBox(35, 13, 20, 20);
             checkboxCat11.Top = checkboxCat11.Top + 20;
             checkboxCat1.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat12 = sheet.CheckBoxes.AddCheckBox(22, 13, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat12 = sheet.CheckBoxes.AddCheckBox(36, 13, 20, 20);
             checkboxCat12.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat13 = sheet.CheckBoxes.AddCheckBox(23, 13, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat13 = sheet.CheckBoxes.AddCheckBox(37, 13, 20, 20);
             checkboxCat13.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat14 = sheet.CheckBoxes.AddCheckBox(24, 13, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat14 = sheet.CheckBoxes.AddCheckBox(38, 13, 20, 20);
             checkboxCat14.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat15 = sheet.CheckBoxes.AddCheckBox(25, 13, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat15 = sheet.CheckBoxes.AddCheckBox(39, 13, 20, 20);
             checkboxCat15.CheckState = Spire.Xls.CheckState.Unchecked;
 
-            Spire.Xls.Core.ICheckBox checkboxCat16 = sheet.CheckBoxes.AddCheckBox(26, 13, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxCat16 = sheet.CheckBoxes.AddCheckBox(40, 13, 20, 20);
             checkboxCat16.CheckState = Spire.Xls.CheckState.Unchecked;
 
             switch (z.cat)
@@ -463,93 +518,61 @@ namespace LibGenerateZaFoms.Utils
 
             //Окончание флажков для категории ЗЛ
 
-            //Пол
-            Spire.Xls.Core.ICheckBox checkboxSexM = sheet.CheckBoxes.AddCheckBox(29, 4, 20, 20);
-            checkboxSexM.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxSexF = sheet.CheckBoxes.AddCheckBox(29, 6, 20, 20);
-            checkboxSexF.CheckState = Spire.Xls.CheckState.Unchecked;
-            if (z.Sex.ToLower().Equals("м"))
-            {
-                checkboxSexM.CheckState = Spire.Xls.CheckState.Checked;
-            }
-            else if (z.Sex.ToLower().Equals("ж"))
-            {
-                checkboxSexF.CheckState = Spire.Xls.CheckState.Checked;
-            }
-
             //Дата рождения
-            sheet.Range["O29"].Text = z.DR;
+            sheet.Range["E43"].Text = z.DR;
             //Место рождения
-            sheet.Range["E31"].Text = z.BirthPlac;
+            sheet.Range["L43"].Text = z.BirthPlac;
             //ДУЛ
-            LibGenerateZaFoms.Utils.ActionZaPolis.SetDoc(ref sheet, z.doc);
+            LibGenerateZaFoms.Utils.ActionZaSk.SetDoc(ref sheet, z.doc);
             //Гражданство
-            sheet.Range["E36"].Text = z.Land;
+            sheet.Range["E49"].Text = z.Land;
             //Адрес регистрации
-            LibGenerateZaFoms.Utils.ActionZaPolis.SetRegAddress(ref sheet, z.regAddress);
+            LibGenerateZaFoms.Utils.ActionZaSk.SetRegAddress(ref sheet, z.regAddress);
             //Бомж
-            Spire.Xls.Core.ICheckBox checkboxBomg = sheet.CheckBoxes.AddCheckBox(46, 2, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxBomg = sheet.CheckBoxes.AddCheckBox(60, 2, 20, 20);
             checkboxBomg.CheckState = Spire.Xls.CheckState.Unchecked;
             if (z.Bomg > 0) checkboxBomg.CheckState = Spire.Xls.CheckState.Checked;
             //Адрес пребывания
-            LibGenerateZaFoms.Utils.ActionZaPolis.SetFactAddress(ref sheet, z.factAddress);
+            LibGenerateZaFoms.Utils.ActionZaSk.SetFactAddress(ref sheet, z.factAddress);
             //Сведения о втором документе
-            LibGenerateZaFoms.Utils.ActionZaPolis.SetDoc2(ref sheet, z.doc2);
+            LibGenerateZaFoms.Utils.ActionZaSk.SetDoc2(ref sheet, z.doc2);
 
             //Начало вида на жительство
-            sheet.Range["E60"].Text = z.VidStart;
+            sheet.Range["E74"].Text = z.VidStart;
             //Окончание вида на жительство
-            sheet.Range["M60"].Text = z.VidEnd;
+            sheet.Range["M74"].Text = z.VidEnd;
 
             //Трудовой договор
-            sheet.Range["C63"].Text = z.TrDogNum;
-            sheet.Range["K63"].Text = z.TrDogSign;
-            sheet.Range["P63"].Text = z.TrDogBeg;
-            sheet.Range["T63"].Text = z.TrDogEnd;
-            sheet.Range["H64"].Text = z.TrDogLocation;
+            sheet.Range["C77"].Text = z.TrDogNum;
+            sheet.Range["K77"].Text = z.TrDogSign;
+            sheet.Range["P77"].Text = z.TrDogBeg;
+            sheet.Range["T77"].Text = z.TrDogEnd;
+            sheet.Range["H78"].Text = z.TrDogLocation;
 
             //ЕАЭС
-            sheet.Range["D66"].Text = z.EaesSer;
-            sheet.Range["M66"].Text = z.EaesNum;
-            sheet.Range["B68"].Text = z.EaesCat;
+            sheet.Range["D80"].Text = z.EaesSer;
+            sheet.Range["M80"].Text = z.EaesNum;
+            sheet.Range["B82"].Text = z.EaesCat;
 
             //Место пребывания
-            sheet.Range["B73"].Text = z.PlaceOfStay;
-            sheet.Range["P74"].Text = z.DbegOfStay;
-            sheet.Range["T74"].Text = z.DendOfStay;
+            sheet.Range["B84"].Text = z.PlaceOfStay;
+            sheet.Range["P85"].Text = z.DbegOfStay;
+            sheet.Range["T85"].Text = z.DendOfStay;
 
             //СНИЛС
-            sheet.Range["O75"].Text = z.Snils;
+            sheet.Range["O86"].Text = z.Snils;
 
             //Контакты
-            sheet.Range["G77"].Text = z.PhoneMob;
-            sheet.Range["M77"].Text = z.PhoneHome;
-            sheet.Range["S77"].Text = z.PhoneWork;
-            sheet.Range["G78"].Text = z.Email;
+            sheet.Range["G88"].Text = z.PhoneMob;
+            sheet.Range["M88"].Text = z.PhoneHome;
+            sheet.Range["S88"].Text = z.PhoneWork;
+            sheet.Range["G89"].Text = z.Email;
 
             //Оповещения
-            LibGenerateZaFoms.Utils.ActionZaPolis.SetNotif(ref sheet, z.notif);
-
-            //Прежние данные
-            sheet.Range["D85"].Text = z.OldFamip;
-            sheet.Range["L85"].Text = z.OldNamep;
-            sheet.Range["F87"].Text = z.OldOtchp;
-            Spire.Xls.Core.ICheckBox checkboxOldSexM = sheet.CheckBoxes.AddCheckBox(89, 4, 20, 20);
-            checkboxOldSexM.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxOldSexF = sheet.CheckBoxes.AddCheckBox(89, 6, 20, 20);
-            checkboxOldSexF.CheckState = Spire.Xls.CheckState.Unchecked;
-            if (z.OldSex.ToLower().Equals("м"))
-            {
-                checkboxOldSexM.CheckState = Spire.Xls.CheckState.Checked;
-            }
-            else if (z.OldSex.ToLower().Equals("ж"))
-            {
-                checkboxOldSexF.CheckState = Spire.Xls.CheckState.Checked;
-            }
-            sheet.Range["N89"].Text = z.OldDR;
+            LibGenerateZaFoms.Utils.ActionZaSk.SetNotif(ref sheet, z.notif);
 
             //Представитель
-            if (z.agent != null) LibGenerateZaFoms.Utils.ActionZaPolis.SetAgent(ref sheet, z.agent);
+            if (z.agent != null) LibGenerateZaFoms.Utils.ActionZaSk.SetAgent(ref sheet, z.agent);
 
             //Расшифровка подписи
             string full_name = z.Famip;
@@ -561,24 +584,25 @@ namespace LibGenerateZaFoms.Utils
                 if (z.agent.Namep.Length > 0) full_name = full_name + " " + z.agent.Namep.Substring(0, 1) + ".";
                 if (z.agent.Otchp.Length > 0) full_name = full_name + " " + z.agent.Otchp.Substring(0, 1) + ".";
             }
-            sheet.Range["H128"].Text = full_name;
-            sheet.Range["I134"].Text = full_name;
-            sheet.Range["I137"].Text = full_name;
+            sheet.Range["H134"].Text = full_name;
+            sheet.Range["I140"].Text = full_name;
+            sheet.Range["I143"].Text = full_name;
 
             //Дата заявления
-            sheet.Range["Q128"].Text = z.DZ;
+            sheet.Range["Q134"].Text = z.DZ;
             //Менеджер
-            sheet.Range["N130"].Text = z.Manager;
+            sheet.Range["N136"].Text = z.Manager;
 
             //Согласие
-            Spire.Xls.Core.ICheckBox checkboxSogl1 = sheet.CheckBoxes.AddCheckBox(133, 1, 20, 20);
-            checkboxSogl1.Top = checkboxSogl1.Top + 20;
+            Spire.Xls.Core.ICheckBox checkboxSogl1 = sheet.CheckBoxes.AddCheckBox(139, 1, 20, 20);
+            checkboxSogl1.Top = checkboxSogl1.Top + 30;
             checkboxSogl1.CheckState = Spire.Xls.CheckState.Checked;
-            Spire.Xls.Core.ICheckBox checkboxSogl2 = sheet.CheckBoxes.AddCheckBox(136, 1, 20, 20);
+            Spire.Xls.Core.ICheckBox checkboxSogl2 = sheet.CheckBoxes.AddCheckBox(142, 1, 20, 20);
             checkboxSogl2.CheckState = Spire.Xls.CheckState.Checked;
+            checkboxSogl2.Top = checkboxSogl2.Top + 30;
 
-            sheet.PageSetup.TopMargin = 0.10;
-            sheet.PageSetup.BottomMargin = 0.10;
+            sheet.PageSetup.TopMargin = 0.30;
+            sheet.PageSetup.BottomMargin = 0.30;
             sheet.PageSetup.LeftMargin = 0.45;
 
             DateTime dR = DateTime.MinValue;
@@ -598,7 +622,7 @@ namespace LibGenerateZaFoms.Utils
             if (showFile) System.Diagnostics.Process.Start(Path.Combine(z.PathOut, filePdf));
         }
 
-        public static void CreateListPDF(List<LibGenerateZaFoms.Models.ZaPolis> lz, bool showFile = true, bool merge = true)
+        public static void CreateListPDF(List<LibGenerateZaFoms.Models.ZaSk> lz, bool showFile = true, bool merge = true)
         {
             List<string> pdfFilePaths = new List<string>();
             foreach (var item in lz)
@@ -608,7 +632,7 @@ namespace LibGenerateZaFoms.Utils
             }
             if (merge)
             {
-                string filename = Path.Combine(lz[0].PathOut, "Zpolis" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".pdf");
+                string filename = Path.Combine(lz[0].PathOut, "Zsk" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".pdf");
                 MergePDFs(filename, pdfFilePaths.ToArray());
                 foreach (var item in pdfFilePaths)
                 {
@@ -638,8 +662,17 @@ namespace LibGenerateZaFoms.Utils
                 {
                     using (var pdfDoc = PdfReader.Open(pdf, PdfDocumentOpenMode.Import))
                     {
-                        for (var i = 0; i < pdfDoc.PageCount; i++)
-                            targetDoc.AddPage(pdfDoc.Pages[i]);
+                        for (var i = 0; i <= pdfDoc.PageCount; i++)
+                        {
+                            if (i == pdfDoc.PageCount)
+                            {
+                                targetDoc.AddPage();
+                            }
+                            else
+                            {
+                                targetDoc.AddPage(pdfDoc.Pages[i]);
+                            }
+                        }
                     }
                 }
                 targetDoc.Save(targetPath);

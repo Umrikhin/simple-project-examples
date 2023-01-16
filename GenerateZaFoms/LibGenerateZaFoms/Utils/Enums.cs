@@ -24,4 +24,19 @@ namespace LibGenerateZaFoms.Utils
     {
         IzmFam, NeTochnost, Okonchanie
     }
+
+    public enum PrichinaVibor
+    {
+        ViborSmo, ZamenaSmoOneYear, ZamenaSmoPlace, ZamenaSmoEndDog
+    }
+
+    public enum FormaPolis
+    {
+        Bumaga, CancelGetPolis
+    }
+
+    public enum PrichinaGiveup
+    {
+        Giveup, Utrata
+    }
 }
