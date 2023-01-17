@@ -7,6 +7,7 @@ namespace LibGenerateZaFoms.Models
 {
     public class ZaPolis
     {
+        public int id { get; set; } = 0;
         public string SmoName { get; set; }
         public LibGenerateZaFoms.Utils.PrichinaZameni prichina { get; set; }
         public string Famip { get; set; }

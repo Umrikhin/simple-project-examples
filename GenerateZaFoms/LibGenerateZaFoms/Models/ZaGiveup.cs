@@ -7,6 +7,7 @@ namespace LibGenerateZaFoms.Models
 {
     public class ZaGiveup
     {
+        public int id { get; set; } = 0;
         public string SmoName { get; set; }
         public LibGenerateZaFoms.Utils.PrichinaGiveup prichina { get; set; }
         public string ENP { get; set; }

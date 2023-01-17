@@ -7,6 +7,7 @@ namespace LibGenerateZaFoms.Models
 {
     public class ZaDelay
     {
+        public int id { get; set; } = 0;
         public string SmoName { get; set; }
         public string Famip { get; set; }
         public string Namep { get; set; }

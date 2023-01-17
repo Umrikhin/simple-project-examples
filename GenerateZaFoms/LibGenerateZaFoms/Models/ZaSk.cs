@@ -7,6 +7,7 @@ namespace LibGenerateZaFoms.Models
 {
     public class ZaSk
     {
+        public int id { get; set; } = 0;
         public string SmoName { get; set; }
         public LibGenerateZaFoms.Utils.PrichinaVibor prichina { get; set; }
         public LibGenerateZaFoms.Utils.FormaPolis formPolis { get; set; }
