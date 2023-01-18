@@ -36,7 +36,7 @@ namespace LibGenerateZaFoms.Models
             Sex  = string.Empty;
             DR  = string.Empty;
             Land  = string.Empty;
-            status = Utils.AgentStatus.Mother;
+            status = Utils.AgentStatus.NotData;
             doc = new Doc();
             docStatusSer  = string.Empty;
             docStatusNum  = string.Empty;

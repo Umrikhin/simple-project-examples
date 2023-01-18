@@ -17,7 +17,7 @@ namespace LibGenerateZaFoms.Utils
 
     public enum AgentStatus
     {
-        Mother, Father, Opekun, Popechitel, Usinovitel, ByProxy
+        Mother, Father, Opekun, Popechitel, Usinovitel, ByProxy, NotData
     }
 
     public enum PrichinaZameni
