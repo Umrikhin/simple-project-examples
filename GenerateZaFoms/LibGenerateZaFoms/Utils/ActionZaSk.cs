@@ -193,8 +193,8 @@ namespace LibGenerateZaFoms.Utils
             checkboxPopechitel.CheckState = Spire.Xls.CheckState.Unchecked;
             Spire.Xls.Core.ICheckBox checkboxUsinovitel = sh.CheckBoxes.AddCheckBox(104, 21, 20, 20);
             checkboxUsinovitel.CheckState = Spire.Xls.CheckState.Unchecked;
-            Spire.Xls.Core.ICheckBox checkboxByProxy = sh.CheckBoxes.AddCheckBox(105, 21, 20, 20);
-            checkboxByProxy.CheckState = Spire.Xls.CheckState.Unchecked;
+            //Spire.Xls.Core.ICheckBox checkboxByProxy = sh.CheckBoxes.AddCheckBox(105, 21, 20, 20);
+            //checkboxByProxy.CheckState = Spire.Xls.CheckState.Unchecked;
             switch (agent.status)
             {
                 case Utils.AgentStatus.Mother:
@@ -212,9 +212,9 @@ namespace LibGenerateZaFoms.Utils
                 case Utils.AgentStatus.Usinovitel:
                     checkboxUsinovitel.CheckState = Spire.Xls.CheckState.Checked;
                     break;
-                case Utils.AgentStatus.ByProxy:
-                    checkboxByProxy.CheckState = Spire.Xls.CheckState.Checked;
-                    break;
+                //case Utils.AgentStatus.ByProxy:
+                //    checkboxByProxy.CheckState = Spire.Xls.CheckState.Checked;
+                //    break;
             }
 
             //Документ
@@ -382,7 +382,7 @@ namespace LibGenerateZaFoms.Utils
                 Spire.Xls.Core.ITextBoxShape textboxEnp = sheet.TextBoxes.AddTextBox(18, 5, 20, 20);
                 textboxEnp.Left = textboxEnp.Left + i * 20;
                 if (z.ENP.Length == 16) textboxEnp.Text = z.ENP[i].ToString();
-                textboxEnp.RichText.SetFont(0, 1, sheet.Range["B19"].Style.Font);
+                if (z.ENP.Length == 16) textboxEnp.RichText.SetFont(0, 1, sheet.Range["B19"].Style.Font);
                 textboxEnp.TextFrame.IsAutoMargin = true;
                 textboxEnp.HAlignment = CommentHAlignType.Center;
                 textboxEnp.VAlignment = CommentVAlignType.Center;
