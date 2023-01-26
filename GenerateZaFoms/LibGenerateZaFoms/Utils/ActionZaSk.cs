@@ -662,9 +662,9 @@ namespace LibGenerateZaFoms.Utils
                 {
                     using (var pdfDoc = PdfReader.Open(pdf, PdfDocumentOpenMode.Import))
                     {
-                        for (var i = 0; i <= pdfDoc.PageCount; i++)
+                        for (var i = 0; i <= Math.Min(pdfDoc.PageCount, 3); i++)
                         {
-                            if (i == pdfDoc.PageCount)
+                            if (i == Math.Min(pdfDoc.PageCount, 3))
                             {
                                 targetDoc.AddPage();
                             }
