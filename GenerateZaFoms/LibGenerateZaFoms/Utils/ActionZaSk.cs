@@ -334,6 +334,7 @@ namespace LibGenerateZaFoms.Utils
             //Шапка заявления
             sheet.Range["K1"].Text = z.SmoName;
             sheet.Range["K3"].Text = (z.Famip + " " + z.Namep + " " + z.Otchp).Replace("  ", " ").Trim();
+            if (z.agent.Famip.Length > 0) sheet.Range["K3"].Text = (z.agent.Famip + " " + z.agent.Namep + " " + z.agent.Otchp).Replace("  ", " ").Trim();
 
             sheet.Range["D8"].Text = z.SmoName;
 

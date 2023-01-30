@@ -329,6 +329,7 @@ namespace LibGenerateZaFoms.Utils
             //Шапка заявления
             sheet.Range["K1"].Text = z.SmoName;
             sheet.Range["K3"].Text = (z.Famip + " " + z.Namep + " " + z.Otchp).Replace("  ", " ").Trim();
+            if (z.agent.Famip.Length > 0) sheet.Range["K3"].Text = (z.agent.Famip + " " + z.agent.Namep + " " + z.agent.Otchp).Replace("  ", " ").Trim();
 
             Spire.Xls.Core.ICheckBox checkboxVipiska = sheet.CheckBoxes.AddCheckBox(8, 4, 20, 20);
             checkboxVipiska.CheckState = Spire.Xls.CheckState.Checked;
@@ -638,7 +639,7 @@ namespace LibGenerateZaFoms.Utils
                 {
                     using (var pdfDoc = PdfReader.Open(pdf, PdfDocumentOpenMode.Import))
                     {
-                        for (var i = 0; i < pdfDoc.PageCount; i++)
+                        for (var i = 0; i < Math.Min(pdfDoc.PageCount, 2); i++)
                             targetDoc.AddPage(pdfDoc.Pages[i]);
                     }
                 }
