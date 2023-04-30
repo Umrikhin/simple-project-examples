@@ -1,0 +1,25 @@
+﻿@using Parcels.Services
+@inject IHttpContextAccessor HttpContextAccessor
+
+@if (HttpContextAccessor.HttpContext?.Session.GetString("UserId_Parcels") != null)
+{
+    try
+    {
+        var UserName = HttpContextAccessor.HttpContext?.Session.GetString("UserName") ?? string.Empty;
+        if (UserName.Length == 0) throw new Exception("Имя пользователя не найдено");
+        <form method="post" asp-action="Logout" asp-controller="Home">
+            @UserName
+            <button type="submit" class="btn btn-danger">Выйти</button>
+        </form>
+    }
+    catch
+    {
+        HttpContextAccessor.HttpContext?.Session.Remove("UserId_Parcels");
+        HttpContextAccessor.HttpContext?.Response.Cookies.Delete("UserId_Parcels");
+        HttpContextAccessor.HttpContext?.Response.Redirect("/");
+    }
+}
+else
+{
+    <a class="btn btn-danger" asp-action="Login">Войти</a>
+}

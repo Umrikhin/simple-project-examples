@@ -1,0 +1,54 @@
+﻿@model Parcels.Models.LoginUser
+@{
+    ViewData["Title"] = "Вход";
+}
+<h1>@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col-md-8">
+        <section>
+            <form id="account" method="post" asp-action="Login">
+                <h4>Используйте учетную запись пользователя ИС ОМС</h4>
+                <hr />
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-group">
+                    <label asp-for="User">Пользователь сервиса*:</label>
+                    <div><span asp-validation-for="User" class="text-danger"></span></div>
+                    <input id="tags" class="form-control" asp-for="User" placeholder="Ваше Имя" maxlength="100" />
+                </div><br />
+                <div class="form-group">
+                    <label asp-for="Password">Пароль*:</label>
+                    <div><span asp-validation-for="Password" class="text-danger"></span></div>
+                    <input class="form-control" type="password" placeholder="Ваш пароль" asp-for="Password" maxlength="20" />
+                </div>
+                <div>
+                    <em>Поля помеченные * обязательны.</em><br />
+                </div>
+                <div class="form-group">
+                    <button id="login-submit" type="submit" class="btn btn-primary">Вход</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(function () {
+        $("#tags").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '/Home/FindUsers',
+                    data: { "frarment": $("#tags").val() },
+                    dataType: "json",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item.vcUserName;
+                        }))
+                    }
+                });
+            },
+            minLength: 2
+        });
+    });
+</script>
