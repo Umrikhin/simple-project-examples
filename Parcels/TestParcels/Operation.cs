@@ -14,7 +14,7 @@ namespace TestParcels
 {
     internal class Operation
     {
-        static HttpClient _client = new HttpClient();
+        public static HttpClient _client = new HttpClient();
         public static string UrlWebApi = "http://localhost:5276";
         static string key = "alfa"; 
 

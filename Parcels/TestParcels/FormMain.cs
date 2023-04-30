@@ -107,6 +107,7 @@ namespace TestParcels
         private void FormMain_Load(object sender, EventArgs e)
         {
             textBoxUrl.Text = Operation.UrlWebApi;
+            Operation._client.Timeout = new TimeSpan(0, 5, 0);
         }
 
         private async void buttonGetData_Click(object sender, EventArgs e)
