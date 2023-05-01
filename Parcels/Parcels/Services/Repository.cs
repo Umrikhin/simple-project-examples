@@ -25,6 +25,14 @@ namespace Parcels.Services
             }
         }
 
+        public FileParcel GetRow(string iFile)
+        {
+            using (IDbConnection db = new SqlConnection(cn))
+            {
+                return db.Query<FileParcel>($"SELECT * FROM tbFileParcels WHERE StartFile = @iFile", new { iFile }).FirstOrDefault() ?? new FileParcel() { Id = Guid.Empty };
+            }
+        }
+
         //Возвращает последние записи из таблицы с данными
         public IEnumerable<FileParcel> GetTop(string CTERR = "", int day = 1)
         {

@@ -140,6 +140,10 @@ namespace Parcels.Controllers
             Guid newId = Guid.Empty;
             try
             {
+                if (_rep.GetRow(parcel.StartFile).Id != Guid.Empty)
+                {
+                    return BadRequest("Выбранный файл уже загружался.");
+                }
                 //выполняем загрузку файла от клиента, разархивирование и передачу его общий архив и в папку для отправки
                 //******************************************************************************************
                 if (parcel.BodyStartFile != null)
