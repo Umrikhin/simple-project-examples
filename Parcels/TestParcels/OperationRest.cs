@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using TestParcels.Models;
 
-namespace TestParcels
+namespace TestParcelsNet4
 {
     public class OperationRest
     {
@@ -57,22 +57,29 @@ namespace TestParcels
             }
             catch (WebException we)
             {
-                var wResp = (HttpWebResponse)we.Response;
-                var wRespStatusCode = wResp.StatusCode;
-                var wStream = wResp.GetResponseStream();
-                var rStream = new StreamReader(wStream, System.Text.Encoding.UTF8);
-                var resultat = rStream.ReadToEnd();
-                if (wRespStatusCode == HttpStatusCode.NotFound)
-                {
-                    MessageBox.Show($"Данных не найдено. {resultat}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (wRespStatusCode == HttpStatusCode.BadRequest)
-                {
-                    MessageBox.Show(resultat, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (we.Response != null)
+                { 
+                    var wResp = (HttpWebResponse)we.Response;
+                    var wRespStatusCode = wResp.StatusCode;
+                    var wStream = wResp.GetResponseStream();
+                    var rStream = new StreamReader(wStream, System.Text.Encoding.UTF8);
+                    var resultat = rStream.ReadToEnd();
+                    if (wRespStatusCode == HttpStatusCode.NotFound)
+                    {
+                        MessageBox.Show($"Данных не найдено. {resultat}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (wRespStatusCode == HttpStatusCode.BadRequest)
+                    {
+                        MessageBox.Show(resultat, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Метод не выполнен: {wRespStatusCode}.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show($"Метод не выполнен: {wRespStatusCode}.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ответ от сервера не получен.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception err)
@@ -112,22 +119,29 @@ namespace TestParcels
             }
             catch (WebException we)
             {
-                var wResp = (HttpWebResponse)we.Response;
-                var wRespStatusCode = wResp.StatusCode;
-                var wStream = wResp.GetResponseStream();
-                var rStream = new StreamReader(wStream, System.Text.Encoding.UTF8);
-                var resultat = rStream.ReadToEnd();
-                if (wRespStatusCode == HttpStatusCode.NotFound)
+                if (we.Response != null)
                 {
-                    MessageBox.Show($"Данных не найдено. {resultat}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (wRespStatusCode == HttpStatusCode.BadRequest)
-                {
-                    MessageBox.Show(resultat, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    var wResp = (HttpWebResponse)we.Response;
+                    var wRespStatusCode = wResp.StatusCode;
+                    var wStream = wResp.GetResponseStream();
+                    var rStream = new StreamReader(wStream, System.Text.Encoding.UTF8);
+                    var resultat = rStream.ReadToEnd();
+                    if (wRespStatusCode == HttpStatusCode.NotFound)
+                    {
+                        MessageBox.Show($"Данных не найдено. {resultat}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (wRespStatusCode == HttpStatusCode.BadRequest)
+                    {
+                        MessageBox.Show(resultat, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Метод не выполнен: {wRespStatusCode}.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show($"Метод не выполнен: {wRespStatusCode}.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ответ от сервера не получен.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return new List<FileParcel>();
             }
@@ -168,22 +182,29 @@ namespace TestParcels
             }
             catch (WebException we)
             {
-                var wResp = (HttpWebResponse)we.Response;
-                var wRespStatusCode = wResp.StatusCode;
-                var wStream = wResp.GetResponseStream();
-                var rStream = new StreamReader(wStream, System.Text.Encoding.UTF8);
-                var resultat = rStream.ReadToEnd();
-                if (wRespStatusCode == HttpStatusCode.NotFound)
+                if (we.Response != null)
                 {
-                    MessageBox.Show($"Данных не найдено. {resultat}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (wRespStatusCode == HttpStatusCode.BadRequest)
-                {
-                    MessageBox.Show(resultat, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    var wResp = (HttpWebResponse)we.Response;
+                    var wRespStatusCode = wResp.StatusCode;
+                    var wStream = wResp.GetResponseStream();
+                    var rStream = new StreamReader(wStream, System.Text.Encoding.UTF8);
+                    var resultat = rStream.ReadToEnd();
+                    if (wRespStatusCode == HttpStatusCode.NotFound)
+                    {
+                        MessageBox.Show($"Данных не найдено. {resultat}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (wRespStatusCode == HttpStatusCode.BadRequest)
+                    {
+                        MessageBox.Show(resultat, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Метод не выполнен: {wRespStatusCode}.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show($"Метод не выполнен: {wRespStatusCode}.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ответ от сервера не получен.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return new RetFile();
             }
@@ -228,22 +249,29 @@ namespace TestParcels
             }
             catch (WebException we)
             {
-                var wResp = (HttpWebResponse)we.Response;
-                var wRespStatusCode = wResp.StatusCode;
-                var wStream = wResp.GetResponseStream();
-                var rStream = new StreamReader(wStream, System.Text.Encoding.UTF8);
-                var resultat = rStream.ReadToEnd();
-                if (wRespStatusCode == HttpStatusCode.NotFound)
+                if (we.Response != null)
                 {
-                    MessageBox.Show($"Данных не найдено. {resultat}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (wRespStatusCode == HttpStatusCode.BadRequest)
-                {
-                    MessageBox.Show(resultat, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    var wResp = (HttpWebResponse)we.Response;
+                    var wRespStatusCode = wResp.StatusCode;
+                    var wStream = wResp.GetResponseStream();
+                    var rStream = new StreamReader(wStream, System.Text.Encoding.UTF8);
+                    var resultat = rStream.ReadToEnd();
+                    if (wRespStatusCode == HttpStatusCode.NotFound)
+                    {
+                        MessageBox.Show($"Данных не найдено. {resultat}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (wRespStatusCode == HttpStatusCode.BadRequest)
+                    {
+                        MessageBox.Show(resultat, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Метод не выполнен: {wRespStatusCode}.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show($"Метод не выполнен: {wRespStatusCode}.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ответ от сервера не получен.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception err)
