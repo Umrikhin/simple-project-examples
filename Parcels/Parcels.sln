@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parcels", "Parcels\Parcels.csproj", "{DD70B39F-B595-42B2-BACB-109375B11BA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestParcels", "TestParcels\TestParcels.csproj", "{551E2778-29F7-4968-8D15-AF1C31DF383B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestParcels", "TestParcels\TestParcels.csproj", "{551E2778-29F7-4968-8D15-AF1C31DF383B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

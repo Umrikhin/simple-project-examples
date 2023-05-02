@@ -24,7 +24,31 @@ namespace Parcels.Controllers
         public IActionResult Index(int day = 1)
         {
             var rows = _repData.GetTop(day: day);
+            ViewBag.Days = GetDaysForSelect(day);
             return View(rows);
+        }
+
+        //Получение данных по состоянию счета за период (выбранный год)
+        [HttpPost]
+        [ServiceFilter(typeof(AuthorizationFilter))]
+        public IActionResult GetDataParcels(int days = 1)
+        {   
+            ViewBag.Days = GetDaysForSelect(days);
+            return RedirectToAction("Index", "Home", new { day = days });
+        }
+
+        Microsoft.AspNetCore.Mvc.Rendering.SelectList GetDaysForSelect(int selItem)
+        {
+            List<Period> items = new List<Period>();
+            items.Add(new Period() { Val = 1, Name = "Последний 1 день" });
+            items.Add(new Period() { Val = 3, Name = "Последние 3 дня" });
+            items.Add(new Period() { Val = 5, Name = "Последние 5 дней" });
+            items.Add(new Period() { Val = 10, Name = "Последние 10 дней" });
+            items.Add(new Period() { Val = 15, Name = "Последние 15 дней" });
+            items.Add(new Period() { Val = 30, Name = "Последние 30 дней" });
+            var selList = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(items, "Val", "Name");
+            selList.Where(x => x.Value == selItem.ToString()).ToList().ForEach(z => { z.Selected = true; });
+            return selList;
         }
 
         public IActionResult Login()

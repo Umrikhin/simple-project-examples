@@ -4,10 +4,22 @@
     ViewData["Title"] = "Домашняя. Список посылок";
 }
 @section headerSection
-{
+    {
 
 }
-<h1>Список посылок за последний день</h1>
+<h1>Список посылок за:</h1>
+
+<form method="post" asp-action="GetDataParcels">
+    <div name="errList" asp-validation-summary="All"></div>
+    <div class="row mb-2">
+        <div class="col-md-4">
+            <div class="form-group">
+                <select asp-items=@ViewBag.Days class="form-select" name="days" onchange="this.form.submit();"></select>
+            </div>
+        </div>
+    </div>
+</form>
+
 @if (Model != null)
 {
     <div class="table-responsive">
