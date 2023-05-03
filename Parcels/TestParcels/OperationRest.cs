@@ -89,7 +89,7 @@ namespace TestParcelsNet4
             return result;
         }
 
-        public List<FileParcel> GetFileParcels(string CTERR, int day)
+        public List<FileParcel> GetFileParcels(string CTERR, int IdUser, int day)
         {
             HttpWebRequest Req;
             HttpWebResponse resp;
@@ -97,7 +97,7 @@ namespace TestParcelsNet4
             StreamReader readStream;
             try
             {
-                Req = (HttpWebRequest)WebRequest.Create(_UrlWebApi + string.Format("/api/parcels/get?CTERR={0}&day={1}", CTERR, day));
+                Req = (HttpWebRequest)WebRequest.Create(_UrlWebApi + string.Format("/api/parcels/get?CTERR={0}&IdUser={1}&day={2}", CTERR, IdUser, day));
                 Req.Timeout = _timeout;
                 Req.Method = "GET";
                 Req.AllowAutoRedirect = true;

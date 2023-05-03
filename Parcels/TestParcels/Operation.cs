@@ -44,13 +44,13 @@ namespace TestParcels
             return result;
         }
 
-        public static async Task<List<FileParcel>> GetFileParcels(string CTERR, int day)
+        public static async Task<List<FileParcel>> GetFileParcels(string CTERR, int IdUser, int day)
         {
             try
             {
                 if (!_client.DefaultRequestHeaders.Contains("XApiKey")) { _client.DefaultRequestHeaders.Add("XApiKey", key); }
                 //Получение данных с помощью сервиса
-                var response = await _client.GetAsync(UrlWebApi + string.Format("/api/parcels/get?CTERR={0}&day={1}", CTERR, day));
+                var response = await _client.GetAsync(UrlWebApi + string.Format("/api/parcels/get?CTERR={0}&IdUser={1}&day={2}", CTERR, IdUser, day));
                 CheckStatusCode(response.StatusCode);
                 var obj = await response.Content.ReadAsStringAsync();
                 var parcels = JsonConvert.DeserializeObject<List<FileParcel>>(obj) ?? new List<FileParcel>();

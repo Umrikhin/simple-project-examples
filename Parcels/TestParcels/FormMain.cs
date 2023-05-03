@@ -45,7 +45,7 @@ namespace TestParcels
             string iFile = Path.GetFileNameWithoutExtension(file.Name);
             string pFile = "p" + iFile.Substring(1);
 
-            var bodyFileParcel = new BodyFileParcel() { Id = Guid.Empty, CTERR = "401", StartFile = iFile, DateStart = DateTime.Now, RetFile = pFile };
+            var bodyFileParcel = new BodyFileParcel() { Id = Guid.Empty, CTERR = "401", IdUser = 1, StartFile = iFile, DateStart = DateTime.Now, RetFile = pFile };
 
             byte[]? mas = null;
             //Связываем файловый поток с открываемым файлом
@@ -118,7 +118,7 @@ namespace TestParcels
             }
 
             //Выбор списка для получения файлов для 401 территроии за прошедший 1 день
-            var data = await Operation.GetFileParcels("401", 1);
+            var data = await Operation.GetFileParcels("401", 0, 1);
             var list = data.Where(x => x.DateRet == null).ToList();
             if (list.Count == 0)
             {
