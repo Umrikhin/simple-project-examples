@@ -4,21 +4,23 @@
     ViewData["Title"] = "Домашняя. Список посылок";
 }
 @section headerSection
-    {
+{
 
 }
 <h1>Список посылок за:</h1>
 
-<form method="post" asp-action="GetDataParcels">
-    <div name="errList" asp-validation-summary="All"></div>
-    <div class="row mb-2">
-        <div class="col-md-4">
-            <div class="form-group">
-                <select asp-items=@ViewBag.Days class="form-select" name="days" onchange="this.form.submit();"></select>
+<div class="m-1 p-1">
+    <form method="post" asp-action="GetDataParcels">
+        <div name="errList" asp-validation-summary="All"></div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <select asp-items=@ViewBag.Days class="form-select" name="days" onchange="this.form.submit();"></select>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
 
 @if (Model != null)
 {
@@ -28,6 +30,7 @@
                 <tr>
                     <th>Номер</th>
                     <th>Территория</th>
+                    <th>Пользователь</th>
                     <th>Исходный файл</th>
                     <th>Выложен</th>
                     <th>Ответный файл</th>
@@ -43,6 +46,7 @@
                     <tr>
                         <td class="align-middle">@i</td>
                         <td class="align-middle">@item.CTERR</td>
+                        <td class="align-middle">@item.IdUser.ToString()</td>
                         <td class="align-middle">@item.StartFile</td>
                         <td class="align-middle">@item.DateStart.ToString("dd.MM.yyyy HH:mm:ss")</td>
                         <td class="align-middle">@item.RetFile</td>

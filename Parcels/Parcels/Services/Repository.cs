@@ -53,6 +53,7 @@ namespace Parcels.Services
             {
                 var values = new DynamicParameters();
                 values.Add("@CTERR", newFileParcel.CTERR);
+                values.Add("@IdUser", newFileParcel.IdUser);
                 values.Add("@StartFile", newFileParcel.StartFile);
                 values.Add("@DateStart", newFileParcel.DateStart);
                 values.Add("@RetFile", newFileParcel.RetFile);
@@ -70,7 +71,7 @@ namespace Parcels.Services
         {
             using (IDbConnection db = new SqlConnection(cn))
             {
-                var sqlQuery = "UPDATE tbFileParcels SET CTERR = @CTERR, StartFile = @StartFile, DateStart = @DateStart, RetFile = @RetFile, DateRet = @DateRet WHERE Id = @Id";
+                var sqlQuery = "UPDATE tbFileParcels SET CTERR = @CTERR, IdUser = @IdUser, StartFile = @StartFile, DateStart = @DateStart, RetFile = @RetFile, DateRet = @DateRet WHERE Id = @Id";
                 db.Execute(sqlQuery, fileParcel, commandTimeout: _timeout);
                 return fileParcel.Id;
             }

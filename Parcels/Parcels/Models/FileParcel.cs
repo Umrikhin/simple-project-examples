@@ -11,6 +11,9 @@ namespace Parcels.Models
         public string CTERR { get; set; } = string.Empty;
 
         [Required]
+        public int IdUser { get; set; } = 1;
+
+        [Required]
         public string StartFile { get; set; } = string.Empty;
 
         [Required]

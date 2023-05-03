@@ -22,11 +22,13 @@ namespace Parcels.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(string CTERR = "", int day = 1)
+        public IActionResult Get(string CTERR = "", int IdUser = 0, int day = 1)
         {
             try
             {
-                return new ObjectResult(_rep.GetTop(CTERR, day));
+                var result = _rep.GetTop(CTERR, day);
+                if (IdUser > 0) { result.Where(x => x.IdUser == IdUser); }
+                return new ObjectResult(result);
             }
             catch (Exception ex)
             {
@@ -204,6 +206,7 @@ namespace Parcels.Controllers
                 var newParcel = new FileParcel() {
                     Id = newId,
                     CTERR = parcel.CTERR,
+                    IdUser = parcel.IdUser,
                     StartFile = parcel.StartFile,
                     DateStart = DateTime.Now,
                     RetFile = parcel.RetFile,
