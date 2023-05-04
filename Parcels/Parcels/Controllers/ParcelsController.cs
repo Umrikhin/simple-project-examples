@@ -27,7 +27,7 @@ namespace Parcels.Controllers
             try
             {
                 var result = _rep.GetTop(CTERR, day);
-                if (IdUser > 0) { result.Where(x => x.IdUser == IdUser); }
+                if (IdUser > 0) { result = result.Where(x => x.IdUser == IdUser); }
                 return new ObjectResult(result);
             }
             catch (Exception ex)
