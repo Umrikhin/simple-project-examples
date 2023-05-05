@@ -4,6 +4,7 @@ using Parcels.Services;
 using Parcels.Utils;
 using System.Text.RegularExpressions;
 using System;
+using System.Runtime.ConstrainedExecution;
 
 namespace Parcels.Controllers
 {
@@ -21,20 +22,21 @@ namespace Parcels.Controllers
         }
 
         [ServiceFilter(typeof(AuthorizationFilter))]
-        public IActionResult Index(int day = 1)
+        public IActionResult Index(int day = 1, int terr = 0)
         {
             var rows = _repData.GetTop(day: day);
+            if (terr > 0) { rows = rows.Where(x => x.CTERR.Equals(terr.ToString())).ToList(); }
             ViewBag.Days = GetDaysForSelect(day);
+            ViewBag.Terr = GetTerrForSelect(terr);
             return View(rows);
         }
 
         //Получение данных по состоянию счета за период (выбранный год)
         [HttpPost]
         [ServiceFilter(typeof(AuthorizationFilter))]
-        public IActionResult GetDataParcels(int days = 1)
-        {   
-            ViewBag.Days = GetDaysForSelect(days);
-            return RedirectToAction("Index", "Home", new { day = days });
+        public IActionResult GetDataParcels(int days = 1, int terr = 0)
+        {
+            return RedirectToAction("Index", "Home", new { day = days, terr });
         }
 
         Microsoft.AspNetCore.Mvc.Rendering.SelectList GetDaysForSelect(int selItem)
@@ -46,6 +48,28 @@ namespace Parcels.Controllers
             items.Add(new Period() { Val = 10, Name = "Последние 10 дней" });
             items.Add(new Period() { Val = 15, Name = "Последние 15 дней" });
             items.Add(new Period() { Val = 30, Name = "Последние 30 дней" });
+            var selList = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(items, "Val", "Name");
+            selList.Where(x => x.Value == selItem.ToString()).ToList().ForEach(z => { z.Selected = true; });
+            return selList;
+        }
+
+        Microsoft.AspNetCore.Mvc.Rendering.SelectList GetTerrForSelect(int selItem)
+        {
+            List<ElTerr> items = new List<ElTerr>();
+            items.Add(new ElTerr() { Val = 0, Name = "Все" });
+            items.Add(new ElTerr() { Val = 401, Name = "Ростов" });
+            items.Add(new ElTerr() { Val = 404, Name = "Азов" });
+            items.Add(new ElTerr() { Val = 407, Name = "Батайск" });
+            items.Add(new ElTerr() { Val = 409, Name = "Б.Калитва" });
+            items.Add(new ElTerr() { Val = 430, Name = "Новошахтинск" });
+            items.Add(new ElTerr() { Val = 415, Name = "Гуково" });
+            items.Add(new ElTerr() { Val = 417, Name = "Донецк" });
+            items.Add(new ElTerr() { Val = 235, Name = "Мясниковский" });
+            items.Add(new ElTerr() { Val = 231, Name = "Матвеево-Курганский" });
+            items.Add(new ElTerr() { Val = 219, Name = "Зимовниковский" });
+            items.Add(new ElTerr() { Val = 245, Name = "Пролетарский" });
+            items.Add(new ElTerr() { Val = 233, Name = "Милютинский" });
+            items.Add(new ElTerr() { Val = 207, Name = "Боковский" });
             var selList = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(items, "Val", "Name");
             selList.Where(x => x.Value == selItem.ToString()).ToList().ForEach(z => { z.Selected = true; });
             return selList;

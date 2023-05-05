@@ -15,7 +15,14 @@
         <div class="row mb-2">
             <div class="col-md-4">
                 <div class="form-group">
+                    <label>Период</label>
                     <select asp-items=@ViewBag.Days class="form-select" name="days" onchange="this.form.submit();"></select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>По территории</label>
+                    <select asp-items=@ViewBag.Terr class="form-select" name="terr" onchange="this.form.submit();"></select>
                 </div>
             </div>
         </div>
