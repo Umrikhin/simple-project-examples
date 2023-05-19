@@ -7,6 +7,7 @@
 * ***ufanet_recognizer*** - проект asp.net core 5 по распознаванию паспорта РФ на основе сервиса https://ufanetgroup.com/recognition с формированем строки base64 на стороне клиента при помощи JS и Canvas.
 * ***GenerateZaFoms*** - проект winforms по созданию заявлений ФФОМС.
 * ***Parcels*** - решение для работы с посылками ТФОМС: проект микросервиса на ASP.NET Core и проект winforms .net 6 для тестирования службы.
+* ***unisender*** - решение для работы с рассылками по E-Mail через сервис uniserder.com: проект winforms .net 6 для тестирования Web API unisender.com.
 
 ## Папка ***utils*** включает примеры проектов приложений-утилит.
 ### Содержит:
