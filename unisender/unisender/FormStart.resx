@@ -1,0 +1,93 @@
+﻿<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="textBoxMsg.Text" xml:space="preserve">
+    <value>Уважаемый(ая) {{Name}}!
+	
+Медицинское страховое общество «Панацея» информирует, что в этом году у Вас есть возможность пройти диспансеризацию по полису ОМС бесплатно. Для этого Вам необходимо в %mnt% обратиться с паспортом и полисом ОМС в свою поликлинику по месту жительства. %mo% телефон регистратуры: %tel_mo%.
+
+Диспансеризация - один из видов обследования здоровья населения. Прежде всего, обследования направлены на раннее выявление хронических заболеваний, а также на выявление основных факторов риска их развития. Объем исследований зависит от возраста и пола:
+1.	анкетирование;
+2.	расчет на основании антропометрии  индекса массы тела;
+3.	измерение артериального давления на периферических артериях;
+4.	исследование уровня общего холестерина  и глюкозы в крови натощак;
+5.	определение относительного сердечно-сосудистого риска у граждан в возрасте от 18 до 39 лет;
+6.	определение абсолютного сердечно-сосудистого риска у граждан в возрасте от 40 до 64 лет;
+7.	флюорографию легких или рентгенографию легких 1 раз в 2 года;
+8.	электрокардиографию в покое при первом прохождении, далее с 35 лет и старше 1 раз в год;
+9.	измерение внутриглазного давления при первом прохождении, далее с 40 лет 1 раз в год;
+10.	осмотр фельдшером (акушеркой) или врачом акушером-гинекологом женщин в возрасте от 18 до 39 лет 1 раз в год;
+11.	проведение мероприятий скрининга направленного на раннее выявление онкозаболеваний;
+12.	общий анализ крови (гемоглобин, лейкоциты, СОЭ);
+13.	проведение краткого индивидуального профилактического консультирования терапевтом;
+14.	прием (осмотр) врачом-терапевтом по результатам первого этапа диспансеризации;
+Перечень мероприятий скрининга, направленного на раннее выявление онкологических заболеваний:
+1.	скрининг на выявление злокачественных новообразований шейки матки:
+осмотр фельдшером (акушеркой) или врачом акушером- гинекологом 1 раз в год;
+в возрасте от 18 до 64 лет включительно - взятие мазка с шейки матки, цитологическое исследование мазка с шейки матки 1 раз в 3 года;
+2.	 в возрасте от 40 до 75 лет включительно - маммография обеих молочных желез в двух проекциях 1 раз в 2 года;
+3.	в возрасте 45, 50, 55, 60 и 64 лет - определение простат-специфического антигена в крови;
+4. в возрасте от 40 до 64 лет включительно - исследование кала на скрытую кровь иммунохимическим качественным или количественным методом 1 раз в 2 года;
+в возрасте от 65 до 75 лет включительно - исследование кала на скрытую кровь иммунохимическим качественным или количественным методом 1 раз в год;
+5. осмотр на выявление визуальных и иных локализаций онкологических заболеваний, включающий осмотр кожных покровов, слизистых губ и ротовой полости, пальпацию щитовидной железы, лимфатических узлов;
+6. в возрасте 45 лет – эзофагогастродуоденоскопия.  
+Диспансеризация поможет сохранить Ваше здоровье!
+Более подробную информацию Вы можете узнать на нашем сайте www.mco-panacea.ru или по телефону «горячей линии» ООО МСО «Панацея» 8 800 2000 868 (круглосуточно, бесплатно)</value>
+  </data>
+</root>
