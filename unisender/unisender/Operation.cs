@@ -15,7 +15,7 @@ namespace unisender
     {
         public static HttpClient _client = new HttpClient();
         public static string UrlWebApi = "https://api.unisender.com/ru";
-        static string key = "ваш_ключ";
+        static string key = "697u4go34qqqofofminxiajbioo98ibd46w1wjae";
 
         //1. Создает рассылку
         public static async Task<RootCreateEmailMessage> createEmailMessage(string senderName, string sender_email, string subject, string HTMLBODY, string list_id)
@@ -73,6 +73,8 @@ namespace unisender
             try
             {
                 var response = await _client.GetAsync(UrlWebApi + string.Format("/api/createCampaign?api_key={0}&message_id={1}", key, message_id));
+                //Если нужно отслеживать прочтение и переходы, то к строке параметров нужно добавить
+                //&track_read=1&track_links=1
                 CheckStatusCode(response.StatusCode);
                 var obj = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<RootCreateCampaing>(obj);
